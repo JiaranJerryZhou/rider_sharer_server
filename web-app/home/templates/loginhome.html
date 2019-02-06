@@ -1,0 +1,71 @@
+{% extends "base_generic.html" %}
+{% block title%}<title>Home</title>{% endblock %}
+{% block style %}
+<style>
+  .bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  }
+
+  @media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+  font-size: 3.5rem;
+  }
+  }
+</style>
+{% endblock%}
+{% block css %}
+<link href="/static/css/loginhome.css" rel="stylesheet">
+{% endblock %}
+{% block main %}
+
+
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+        <!-- START THE FEATURETTES -->
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Congratulations! You are here!<span class="text-muted">Bro.</span></h2>
+        <p class="lead">We are exhausted about these UI.</p>
+      </div>
+      <div class="col-md-5">
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="200" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500" src="/static/images/bg_image.jpg"/><title>Placeholder</title><rect fill="#eee" width="100%" height="100%"/></img>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+	<img xmlns="http://www.w3.org/2000/svg" width="144px", height="144px", preserveAspectRatio="xMidYMid slice", role="img", src="/static/images/icon_ride.png"/></img>
+        <h2>Ride</h2>
+        <p>You can ask for a ride or check onging orders at here.</p>
+        <p><a class="btn btn-secondary" href="{% url 'home:ownerHome'%}" role="button">Go! &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img xmlns="http://www.w3.org/2000/svg" width="144px", height="144px", preserveAspectRatio="xMidYMid slice", role="img", src="/static/images/icon_drive.png"/></img>
+        <h2>Drive</h2>
+        <p>You can pick an order or check onging orders at here</p>
+        <p><a class="btn btn-secondary" href="{% url 'orders:driver_check'%}" role="button">Go! &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+	<img xmlns="http://www.w3.org/2000/svg" width="144px", height="144px", preserveAspectRatio="xMidYMid slice", role="img", src="/static/images/icon_share.png"/></img>
+        <h2>Share</h2>
+        <p>You can find a shared ride here and check onging orders</p>
+        <p><a class="btn btn-secondary" href="{% url 'home:sharerHome'%}" role="button">Go! &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+
+
+  </div><!-- /.container -->
+{% endblock %}

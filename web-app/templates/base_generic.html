@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Default</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--load bootstrap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  {% block style %}
+  {% endblock %}
+  {% block css %}
+  {% endblock %}
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+  </head>
+
+<body>
+
+<header>
+  <!--Navbar-->
+    <nav class="navbar navbar-expand-md bg-dark fixed-top">
+      <a class="navbar-brand" href="{% url 'home:home' %}">BatMobile</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+	<ul class="navbar-nav mr-auto">
+	  <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home:loginHome' %}">Home <span class="sr-only">(current)</span></a>
+	  </li>
+	  <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ride</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="{% url 'orders:owner_request_ride' %}">Make A Request</a>
+              <a class="dropdown-item" href="{% url 'orders:owner_order_list' %}">Orders</a>
+            </div>
+	  </li>
+	  <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Drive</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="{% url 'orders:driver_search_ride' %}">Search</a>
+              <a class="dropdown-item" href="{% url 'orders:driver_order_list' %}">Orders</a>
+              <a class="dropdown-item" href="{% url 'orders:driver_profile' %}">Profile</a>
+            </div>
+	  </li>
+	  <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Share</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="{% url 'orders:sharer_request_ride' %}">Make A Request</a>
+              <a class="dropdown-item" href="{% url 'orders:sharer_order_list' %}">Orders</a>
+            </div>
+	  </li>
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+	  {% if user.is_authenticated %}
+	  <li><a style="color:#fff"><span class="glyphicon glyphicon-user"></span>Welcome, {{ user.get_username}}!&nbsp</a></li>
+	  <li><a href="{% url 'logout' %}" style="color:#888"><span class="glyphicon glyphicon-log-out"></span><u>[ Logout ]</u></a></li>
+	  {% else %}
+	  <li><a href="{% url 'accounts:signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up&nbsp&nbsp</a></li>
+	  <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	  {% endif %}
+	</ul>
+      </div>
+    </nav><!--Navbar end-->
+</header>
+  
+  <main role="main" style="margin: 5rem 0;">
+    {% block main %}
+    <!--wrap up whole screen-->
+  <div class="container marketing">
+
+    <!--main screen div-->
+    <div class="row featurette">
+
+      <!-- content div-->
+      <div class="col-sm-10">
+	{% block content %}
+	{% endblock %}
+      </div>
+      <!-- content div end-->
+
+      <!--pagination div-->
+      {% block pagination %}
+      {% if is_paginated %}
+      <div class="pagination">
+	<span class="page-links">
+	  {% if page_obj.has_previous %}
+	  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" style="color:#888">previous</a>
+	  {% endif %}
+	  <span class="page-current">
+	    <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+	  </span>
+	  {% if page_obj.has_next %}
+	  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}"  style="color:#888">next</a>
+	  {% endif %}
+	</span>
+      </div>    
+      {% endif %}
+      {% endblock %}<!--pagination div end-->
+
+    </div><!--end of container-->
+  </div>
+  {% endblock %}
+  </main>
+  
+<!--unnecessary to revise the code below-->
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>
